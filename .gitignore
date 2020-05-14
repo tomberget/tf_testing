@@ -1,1 +1,6 @@
+#Ignore local .terraform directories
 **/.terraform/*
+
+#Ignore local terraform .tfstate files
+*.tfstate
+*.tfstate.*
