@@ -1,6 +1,7 @@
 # create an assumed role
 resource "aws_iam_role" "assumed_role" {
-  name = "s3"
+  name = "assumed_role"
+
   assume_role_policy = <<POLICY
 {
   "Version": "2012-10-17",
@@ -41,7 +42,7 @@ resource "aws_s3_bucket" "bucket" {
 
   versioning {
     enabled = true
-  } 
+  }
 }
 
 # create a dynamodb table for locking the state file
