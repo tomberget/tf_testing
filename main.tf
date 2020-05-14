@@ -1,4 +1,4 @@
-# create S3 bucket to store the terraform state file
+# create an assumed role
 resource "aws_iam_role" "assumed_role" {
   name = "s3"
   assume_role_policy = <<POLICY
