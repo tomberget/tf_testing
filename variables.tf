@@ -25,3 +25,8 @@ variable "environment" {
 variable "cluster-name" {
   default = "atari-eks-cluster-dev"
 }
+
+# setting kubernetes version
+variable "kubernetes-version" {
+  default = "1.16.8"
+}
