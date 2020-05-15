@@ -4,3 +4,6 @@
 #Ignore local terraform .tfstate files
 *.tfstate
 *.tfstate.*
+
+#Ignore modules folder
+**/.modules/*
