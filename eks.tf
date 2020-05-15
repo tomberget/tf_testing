@@ -11,10 +11,11 @@ module "vpc" {
 }
 
 module "eks" {
-  source       = "terraform-aws-modules/eks/aws"
-  cluster_name = local.cluster_name
-  subnets      = module.vpc.public_subnets
-  vpc_id       = module.vpc.vpc_id
+  source          = "terraform-aws-modules/eks/aws"
+  cluster_name    = local.cluster_name
+  cluster_version = "1.16"
+  subnets         = module.vpc.public_subnets
+  vpc_id          = module.vpc.vpc_id
 
   worker_groups_launch_template = [
     {
