@@ -36,7 +36,6 @@ prometheus:
         spec:
           volumeName: prometheus
           accessModes: ["ReadWriteOnce"]
-          #storageClassName: local-storage
           resources:
             requests:
               storage: 20Gi
