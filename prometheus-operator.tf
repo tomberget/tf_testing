@@ -10,11 +10,11 @@ resource "kubernetes_namespace" "prometheus" {
 }
 
 resource "helm_release" "prometheus-operator" {
-  name  = "prometheus-operator"
+  name       = "prometheus-operator"
   namespace  = kubernetes_namespace.prometheus.metadata[0].name
   repository = "https://kubernetes-charts.storage.googleapis.com"
-  chart = "stable/prometheus-operator"
-  version = "8.13.8"
+  chart      = "stable/prometheus-operator"
+  version    = "8.13.8"
 
   values = [
     data.template_file.prometheus_operator_config.rendered
