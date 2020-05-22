@@ -72,3 +72,8 @@ resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
 ```
 
 Note that the "prefix" and "environment" variables must be the same as what you assign this terraform, in order for the correct S3 bucket and DynamoDB to be picked up by the backend.
+
+## Connecting to the EKS cluster after creation
+
+Much like the Jackson 5, it's as easy as ABC.. Look no further than this article from Amazon:
+[EKS cluster connection](https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/)
