@@ -1,0 +1,98 @@
+## Source: https://github.com/helm/charts/tree/master/stable/prometheus-operator
+commonLabels:
+  prometheus: default
+global:
+  rbac:
+    create: true
+    enabled: true
+
+prometheusOperator:
+  enabled: true
+  createCustomResource: false
+  configReloaderCpu: 130m
+  resources:
+    limits:
+      cpu: 700m
+      memory: 100Mi
+    requests:
+      cpu: 700m
+      memory: 100Mi
+  tlsProxy:
+    enabled: false
+  admissionWebhooks:
+    enabled: false
+
+prometheus:
+  enabled: true
+  prometheusSpec:
+    externalUrl: ""
+    retentionSize: 15GiB
+    retention: 30d
+    routePrefix: /
+    ruleNamespaceSelector: {}
+    serviceMonitorSelector: {}
+    storageSpec:
+     volumeClaimTemplate:
+        spec:
+          volumeName: prometheus
+          accessModes: ["ReadWriteOnce"]
+          #storageClassName: local-storage
+          resources:
+            requests:
+              storage: 20Gi
+    service:
+      type: ClusterIP
+
+alertmanager:
+  alertmanagerSpec:
+    externalUrl: ""
+    routePrefix: /
+    retention: 720h
+    retentionSize: 4GiB
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          volumeName: alertmanager
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
+
+grafana:
+  enabled: true
+  adminUser: admin
+  #adminPassword: ""
+  defaultDashboardsEnabled: true
+  grafana.ini:
+    auth.anonymous:
+      enabled: true
+      org_name: ATARIfam
+  persistence:
+    enabled: true
+    volumeName: grafana
+    storageClassName: standard
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+  service:
+    type: ClusterIP
+    port: 80
+    portName: http
+    portProtocol: TCP
+  sidecar:
+    dashboards:
+      enabled: true
+      datasources:
+        defaultDatasourceEnabled: true
+        enabled: true
+        label: grafana_dashboard
+        searchNamespace: ALL
+  env:
+    GF_AUTH_ANONYMOUS_ENABLED: true
+    GF_AUTH_ANONYMOUS_ORG_NAME: Main Org.
+    GF_AUTH_ANONYMOUS_ORG_ROLE: Editor
+
+coreDns:
+  enabled: true
+kubeDns:
+  enabled: false
