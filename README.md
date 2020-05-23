@@ -1,9 +1,10 @@
 # tf_testing
+
 Trying out Terraform on AWS
 
 Omitted from this Terraform script is how to make the S3 bucket for state, and the DynamoDB state lock. These items are necessary in order to make the backend work as it is supposed to, as well as not destroying them in case that you want to build and tear down the EKS cluster immediately.
 
-Precreating the S3 bucket and dynamodb can be done, running terraform with the following script:
+The S3 bucket and dynamodb, necessary for the backend.tf, can be created by running terraform using the following script:
 
 ```terraform
 #Define terraform version to use
