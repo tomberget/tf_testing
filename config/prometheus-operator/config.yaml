@@ -32,10 +32,10 @@ prometheus:
     ruleNamespaceSelector: {}
     serviceMonitorSelector: {}
     storageSpec:
-     volumeClaimTemplate:
+      volumeClaimTemplate:
         spec:
-          volumeName: prometheus
-          accessModes: ["ReadWriteOnce"]
+          accessModes:
+          - ReadWriteOnce
           resources:
             requests:
               storage: 20Gi
@@ -48,11 +48,11 @@ alertmanager:
     routePrefix: /
     retention: 720h
     retentionSize: 4GiB
-    storageSpec:
+    storage:
       volumeClaimTemplate:
         spec:
-          volumeName: alertmanager
-          accessModes: ["ReadWriteOnce"]
+          accessModes: 
+          - ReadWriteOnce
           resources:
             requests:
               storage: 5Gi
@@ -69,7 +69,7 @@ grafana:
   persistence:
     enabled: true
     volumeName: grafana
-    storageClassName: standard
+    storageClassName: gp2
     accessModes:
       - ReadWriteOnce
     size: 8Gi
