@@ -9,3 +9,7 @@ output "endpoint" {
 output "kubeconfig-certificate-authority-data" {
   value = data.aws_eks_cluster.cluster.certificate_authority.0.data
 }
+
+output "account_id" {
+  value = data.aws_caller_identity.current.account_id
+}
