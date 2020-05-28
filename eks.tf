@@ -1,21 +1,9 @@
-
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "2.6.0"
-
-  name                 = "${var.prefix}-vpc-${var.environment}"
-  cidr                 = "10.0.0.0/16"
-  azs                  = data.aws_availability_zones.available.names
-  public_subnets       = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-  enable_dns_hostnames = true
-}
-
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = local.cluster_name
   cluster_version = "1.16"
-  subnets         = module.vpc.public_subnets
-  vpc_id          = module.vpc.vpc_id
+  subnets         = [aws_subnet.private_0.id, aws_subnet.private_1.id]
+  vpc_id          = aws_vpc.default.id
 
   worker_groups_launch_template = [
     {
