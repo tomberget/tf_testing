@@ -9,4 +9,4 @@ registry: txt
 aws:
   zoneType: public
   region: ${external_dns_region}
-  assumeRoleArn: arn:aws:iam::${account_id}:role/{external_dns_role_name}
+  assumeRoleArn: arn:aws:iam::${account_id}:role/${external_dns_role_name}
