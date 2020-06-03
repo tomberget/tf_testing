@@ -43,6 +43,6 @@ variable "txt_owner_id" {
 
 # setting external dns role name (and lets see how long I take to remove it)
 variable "external_dns_role_name" {
-  type        = string
+  default     = "ExternalDNS"
   description = "IAM role name to use for accessing Route53"
 }
