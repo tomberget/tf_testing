@@ -10,7 +10,7 @@ resource "aws_iam_openid_connect_provider" "default" {
   depends_on = [data.aws_eks_cluster.cluster]
 }
 
-resource "aws_iam_policy" "AllowExternalDNSUpdates" {
+resource "aws_iam_policy" "allow_external_dns_updates" {
   name        = "AllowExternalDNSUpdates"
   path        = "/"
   description = "Allow External DNS to update Route53 records"
@@ -43,7 +43,38 @@ resource "aws_iam_policy" "AllowExternalDNSUpdates" {
 EOF
 }
 
-resource "aws_iam_role" "ExternalDNS" {
+resource "aws_iam_role" "external_dns" {
+  name = var.external_dns_role_name
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "${aws_iam_openid_connect_provider.default.arn}"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "${replace(data.aws_eks_cluster.cluster.identity.0.oidc.0.issuer, "https://", "")}:sub": "system:serviceaccount:external-dns:external-dns"
+        }
+      }
+    }
+  ]
+}
+EOF
+
+  depends_on = [aws_iam_openid_connect_provider.default, aws_iam_policy.allow_external_dns_updates]
+}
+
+resource "aws_iam_role_policy_attachment" "external_dns" {
+  role       = aws_iam_role.external_dns.name
+  policy_arn = aws_iam_policy.allow_external_dns_updates.arn
+}
+
+resource "aws_iam_role" "external_dns_update" {
   name = var.external_dns_role_name
 
   assume_role_policy = <<EOF
@@ -74,5 +105,5 @@ resource "aws_iam_role" "ExternalDNS" {
 }
 EOF
 
-  depends_on = [aws_iam_openid_connect_provider.default, aws_iam_policy.AllowExternalDNSUpdates]
+  depends_on = [aws_iam_role_policy_attachment.external_dns]
 }
