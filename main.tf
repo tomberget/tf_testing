@@ -1,8 +1,8 @@
 
 module "monitoring" {
-  source = "./modules/monitoring"
+  source      = "./modules/monitoring"
   domain_name = var.domain_name
-  org_name = var.prefix
+  org_name    = var.prefix
 }
 
 module "external_dns" {

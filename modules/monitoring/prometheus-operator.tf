@@ -26,6 +26,6 @@ data "template_file" "prometheus_operator_config" {
 
   vars = {
     domain_name = var.domain_name
-    org_name = var.org_name
+    org_name    = var.org_name
   }
 }

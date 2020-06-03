@@ -27,9 +27,9 @@ data "template_file" "external_dns_config" {
   template = file("${path.root}/config/external-dns/config.yaml")
 
   vars = {
-    external_dns_region = var.external_dns_region
-    account_id = var.account_id
-    txt_owner_id = var.txt_owner_id
+    external_dns_region    = var.external_dns_region
+    account_id             = var.account_id
+    txt_owner_id           = var.txt_owner_id
     external_dns_role_name = var.external_dns_role_name
   }
 }

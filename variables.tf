@@ -13,7 +13,7 @@ variable "s3_tfstate_key" {
 ## ENV variables
 # adding a prefix
 variable "prefix" {
-  type = string
+  type        = string
   description = "Company name or other identifier to use as a prefix"
 }
 
@@ -25,7 +25,7 @@ variable "environment" {
 
 # setting kubernetes version
 variable "cluster_version" {
-  type = string
+  type        = string
   description = "Define kubernetes version"
 }
 
