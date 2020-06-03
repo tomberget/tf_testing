@@ -1,0 +1,25 @@
+#https://github.com/helm/charts/blob/master/stable/nginx-ingress/
+controller:
+  ingressClass: nginx
+  kind: Deployment
+  replicaCount: 1
+  publishService:
+    enabled: true
+  service:
+    enabled: true
+    externalTrafficPolicy: Local
+    enableHttp: true
+    enableHttps: false
+    targetPorts:
+      http: 80
+      #https: 443
+    ports:
+      http: 80
+      #https: 443
+    type: LoadBalancer
+    #labels:
+    #  dns: "route53"
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: "${domain_name}"
+    metrics:
+      enabled: true

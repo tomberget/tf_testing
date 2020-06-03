@@ -13,20 +13,38 @@ variable "s3_tfstate_key" {
 ## ENV variables
 # adding a prefix
 variable "prefix" {
-  default = "atari"
+  type = string
+  description = "Company name or other identifier to use as a prefix"
 }
 
 # adding a environment
 variable "environment" {
-  default = "dev"
+  type        = string
+  description = "Used as postfix for naming"
 }
 
 # defining EKS cluster names
-variable "cluster-name" {
+variable "cluster_name" {
   default = "atari-eks-cluster-dev"
 }
 
 # setting kubernetes version
 variable "kubernetes-version" {
   default = "1.16.8"
+}
+
+# setting kubernetes version
+variable "domain_name" {
+  type        = string
+  description = "Domain name to use for ExportDNS, nginx and ingresses"
+}
+
+variable "txt_owner_id" {
+  type        = string
+  description = "TxtOwnerId for ExternalDNS when using AWS Route53"
+}
+
+variable "external_dns_role_name" {
+  type        = string
+  description = "IAM role name to use for accessing Route53"
 }
