@@ -23,11 +23,6 @@ variable "environment" {
   description = "Used as postfix for naming"
 }
 
-# defining EKS cluster names
-variable "cluster_name" {
-  default = "atari-eks-cluster-dev"
-}
-
 # setting kubernetes version
 variable "cluster_version" {
   type = string
