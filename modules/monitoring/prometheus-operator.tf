@@ -25,15 +25,7 @@ data "template_file" "prometheus_operator_config" {
   template = file("${path.root}/config/prometheus-operator/config.yaml")
 
   vars = {
-    external_dns_ingress_dns = "atarifam.com"
-
-    #istio_secret = "${true ? "[istio.default, istio.prometheus-operator-prometheus]" : "[]"}"
-
-    #alertmanager_tls_secret_name = "alertmanager-${replace("tietoevry.site", ".", "-")}-tls"
-
-    #grafana_tls_secret_name = "grafana-${replace("tietoevry.site", ".", "-")}-tls"
-
-    #prometheus_operator_create_crd = true
-    #prometheus_tls_secret_name     = "prometheus-${replace("tietoevry.site", ".", "-")}-tls"
+    domain_name = var.domain_name
+    org_name = var.org_name
   }
 }

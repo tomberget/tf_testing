@@ -27,14 +27,14 @@ prometheus:
   enabled: true
   ingress:
     enabled: true
-    paths: ["/*"]
+    paths: ["/"]
     hosts:
-      - prometheus.${external_dns_ingress_dns}
+    - prometheus.${domain_name}
     annotations:
-      kubernetes.io/ingress.class: traefik-aws
+      kubernetes.io/ingress.class: nginx
       #cert-manager.io/cluster-issuer: letsencrypt
       #kubernetes.io/tls-acme: "true"
-      external-dns.alpha.kubernetes.io/hostname: prometheus.${external_dns_ingress_dns}
+      external-dns.alpha.kubernetes.io/hostname: prometheus.${domain_name}
   prometheusSpec:
     externalUrl: ""
     retentionSize: 15GiB
@@ -51,22 +51,20 @@ prometheus:
             requests:
               storage: 20Gi
     service:
-      type: NodePort
+      type: ClusterIP
 
 alertmanager:
   enabled: true
   service: 
-    type: NodePort
+    type: ClusterIP
   ingress:
     enabled: true
-    paths: ["/*"]
+    paths: ["/"]
     hosts:
-      - alertmanager.${external_dns_ingress_dns}
+      - alertmanager.${domain_name}
     annotations:
-      kubernetes.io/ingress.class: traefik-aws
-      #cert-manager.io/cluster-issuer: letsencrypt
-      #kubernetes.io/tls-acme: "true"
-      external-dns.alpha.kubernetes.io/hostname: alertmanager.${external_dns_ingress_dns}
+      kubernetes.io/ingress.class: nginx
+      external-dns.alpha.kubernetes.io/hostname: alertmanager.${domain_name}
   alertmanagerSpec:
     externalUrl: ""
     routePrefix: /
@@ -89,7 +87,7 @@ grafana:
   grafana.ini:
     auth.anonymous:
       enabled: true
-      org_name: ATARIfam
+      org_name: ${org_name}
   persistence:
     enabled: true
     volumeName: grafana
