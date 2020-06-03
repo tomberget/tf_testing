@@ -29,21 +29,24 @@ variable "cluster_name" {
 }
 
 # setting kubernetes version
-variable "kubernetes-version" {
-  default = "1.16.8"
+variable "cluster_version" {
+  type = string
+  description = "Define kubernetes version"
 }
 
-# setting kubernetes version
+# setting domain name
 variable "domain_name" {
   type        = string
   description = "Domain name to use for ExportDNS, nginx and ingresses"
 }
 
+# setting txt owner id
 variable "txt_owner_id" {
   type        = string
   description = "TxtOwnerId for ExternalDNS when using AWS Route53"
 }
 
+# setting external dns role name (and lets see how long I take to remove it)
 variable "external_dns_role_name" {
   type        = string
   description = "IAM role name to use for accessing Route53"
