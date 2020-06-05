@@ -3,6 +3,7 @@ module "monitoring" {
   source      = "./modules/monitoring"
   domain_name = var.domain_name
   org_name    = var.prefix
+  grafana_pwd = base64encode(var.grafana_pwd)
 }
 
 module "external_dns" {

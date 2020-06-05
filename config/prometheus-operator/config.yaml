@@ -91,12 +91,11 @@ alertmanager:
 
 grafana:
   enabled: true
-  adminUser: admin
-  #adminPassword: ""
+  adminPassword: ${grafana_pwd}
   defaultDashboardsEnabled: true
   grafana.ini:
     auth.anonymous:
-      enabled: true
+      enabled: false
       org_name: ${org_name}
   persistence:
     enabled: true

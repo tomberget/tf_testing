@@ -30,6 +30,7 @@ data "template_file" "prometheus_operator_config" {
     alertmanager_tls_secret_name = "alertmanager-${replace("${var.domain_name}", ".", "-")}-tls"
     grafana_tls_secret_name      = "grafana-${replace("${var.domain_name}", ".", "-")}-tls"
     prometheus_tls_secret_name   = "prometheus-${replace("${var.domain_name}", ".", "-")}-tls"
+    grafana_pwd                  = var.grafana_pwd
   }
 }
 

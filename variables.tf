@@ -51,3 +51,8 @@ variable "email" {
   type        = string
   description = "Email for Lets Encrypt certificates"
 }
+
+variable "grafana_pwd" {
+  type        = string
+  description = "Email for Lets Encrypt certificates"
+}
