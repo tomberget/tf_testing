@@ -411,7 +411,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "avg(irate(http_request_duration_seconds_count{status=\"200\", method=\"GET\"}[10m]))",
+          "expr": "avg(irate(http_request_duration_milliseconds_count{statuscode=\"200\", method=\"get\"}[10m]))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
