@@ -5,6 +5,7 @@ controller:
   replicaCount: 1
   publishService:
     enabled: true
+  
   service:
     enabled: true
     externalTrafficPolicy: Local
@@ -17,10 +18,18 @@ controller:
       http: 80
       https: 443
     type: LoadBalancer
-    #labels:
-    #  dns: "route53"
     annotations:
       external-dns.alpha.kubernetes.io/hostname: "${domain_name}"
-    metrics:
-      serviceMonitor:
-        enabled: true
+  
+  metrics:
+    enabled: true
+    service:
+      labels:
+        scrape-by: prometheus-operator
+      annotations:
+        scrape-by: prometheus-operator
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring
+      additionalLabels: 
+        scrape-by: prometheus-operator
