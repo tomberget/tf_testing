@@ -1,0 +1,21 @@
+# https://cert-manager.io/docs/configuration/acme/
+apiVersion: {{ default "cert-manager.io/v1alpha2" .Values.acme.apiVersion }}
+kind: ClusterIssuer
+metadata:
+  name: "{{ .Values.name }}"
+spec:
+  acme:
+    email: "{{ .Values.acme.email }}"
+    server: "{{ .Values.acme.server }}"
+    privateKeySecretRef:
+      name: "{{ .Values.name }}-account-key"
+
+    solvers:
+    - selector:
+        dnsZones:
+        - "{{ .Values.acme.dns01.dnsZones }}"
+      dns01:
+        route53:
+          region: "{{ .Values.acme.dns01.route53.region }}"
+          hostedZoneID: "{{ .Values.acme.dns01.route53.hostedZoneID }}"
+          role: "{{ .Values.acme.dns01.route53.role }}"

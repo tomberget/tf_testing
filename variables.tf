@@ -36,13 +36,18 @@ variable "domain_name" {
 }
 
 # setting txt owner id
-variable "txt_owner_id" {
+variable "hostedzone_id" {
   type        = string
-  description = "TxtOwnerId for ExternalDNS when using AWS Route53"
+  description = "Hosted Zone ID for ExternalDNS and Cert Manager when using AWS Route53"
 }
 
 # setting external dns role name (and lets see how long I take to remove it)
 variable "external_dns_role_name" {
   default     = "ExternalDNS"
   description = "IAM role name to use for accessing Route53"
+}
+
+variable "email" {
+  type        = string
+  description = "Email for Lets Encrypt certificates"
 }

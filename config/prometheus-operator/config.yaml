@@ -30,11 +30,15 @@ prometheus:
     paths: ["/"]
     hosts:
     - prometheus.${domain_name}
+    tls:
+      - secretName: ${prometheus_tls_secret_name}
+        hosts:
+          - prometheus.${domain_name}
     annotations:
       kubernetes.io/ingress.class: nginx
-      #cert-manager.io/cluster-issuer: letsencrypt
-      #kubernetes.io/tls-acme: "true"
       external-dns.alpha.kubernetes.io/hostname: prometheus.${domain_name}
+      cert-manager.io/cluster-issuer: letsencrypt
+      kubernetes.io/tls-acme: "true"
   prometheusSpec:
     externalUrl: ""
     retentionSize: 15GiB
@@ -62,9 +66,15 @@ alertmanager:
     paths: ["/"]
     hosts:
       - alertmanager.${domain_name}
+    tls:
+      - secretName: ${alertmanager_tls_secret_name}
+        hosts:
+          - alertmanager.${domain_name}
     annotations:
       kubernetes.io/ingress.class: nginx
       external-dns.alpha.kubernetes.io/hostname: alertmanager.${domain_name}
+      cert-manager.io/cluster-issuer: letsencrypt
+      kubernetes.io/tls-acme: "true"
   alertmanagerSpec:
     externalUrl: ""
     routePrefix: /
@@ -100,6 +110,20 @@ grafana:
     port: 80
     portName: http
     portProtocol: TCP
+  ingress:
+    enabled: true
+    path: "/*"
+    hosts:
+      - grafana.${domain_name}
+    tls:
+      - secretName: ${grafana_tls_secret_name}
+        hosts:
+          - grafana.${domain_name}
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      external-dns.alpha.kubernetes.io/hostname: grafana.${domain_name}
+      cert-manager.io/cluster-issuer: letsencrypt
+      kubernetes.io/tls-acme: "true"
   sidecar:
     dashboards:
       enabled: true

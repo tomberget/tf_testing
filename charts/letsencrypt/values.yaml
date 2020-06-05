@@ -1,0 +1,19 @@
+name: letsencrypt
+namespace: cert-manager
+
+acme:
+  server: https://acme-v02.api.letsencrypt.org/directory
+  email: 
+  apiVersion: cert-manager.io/v1alpha3
+
+  letsEncrypt:
+    name: lets-encrypt
+    key:
+
+  dns01:
+    enabled: true
+    dnsZones: 
+    route53:
+      region: 
+      hostedZoneID: 
+      role: 

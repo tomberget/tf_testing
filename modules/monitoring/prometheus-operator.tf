@@ -25,7 +25,10 @@ data "template_file" "prometheus_operator_config" {
   template = file("${path.root}/config/prometheus-operator/config.yaml")
 
   vars = {
-    domain_name = var.domain_name
-    org_name    = var.org_name
+    domain_name                  = var.domain_name
+    org_name                     = var.org_name
+    alertmanager_tls_secret_name = "alertmanager-${replace("${var.domain_name}", ".", "-")}-tls"
+    grafana_tls_secret_name      = "grafana-${replace("${var.domain_name}", ".", "-")}-tls"
+    prometheus_tls_secret_name   = "prometheus-${replace("${var.domain_name}", ".", "-")}-tls"
   }
 }

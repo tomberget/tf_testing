@@ -9,13 +9,13 @@ controller:
     enabled: true
     externalTrafficPolicy: Local
     enableHttp: true
-    enableHttps: false
+    enableHttps: true
     targetPorts:
       http: 80
-      #https: 443
+      https: 443
     ports:
       http: 80
-      #https: 443
+      https: 443
     type: LoadBalancer
     #labels:
     #  dns: "route53"
