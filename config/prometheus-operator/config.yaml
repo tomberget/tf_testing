@@ -112,7 +112,7 @@ grafana:
     portProtocol: TCP
   ingress:
     enabled: true
-    path: "/*"
+    path: "/"
     hosts:
       - grafana.${domain_name}
     tls:
