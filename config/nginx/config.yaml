@@ -22,4 +22,5 @@ controller:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: "${domain_name}"
     metrics:
-      enabled: true
+      serviceMonitor:
+        enabled: true
