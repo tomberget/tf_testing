@@ -1,5 +1,5 @@
 provider "aws" {
-  region  = "eu-north-1"
+  region  = var.aws_region
   version = ">= 2.38.0"
 }
 
