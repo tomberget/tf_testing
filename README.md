@@ -1,6 +1,7 @@
-# Credit
+# Credits
 
 Much inspiration and code has been shifted and lifted from @Starefossen: <https://github.com/evry-ace/kubernetes-on-air>
+A Grafana dashboard has been tweaked, originally created by @buhay. Reference in the list below.
 
 ## Creating a basic spot instance EKS cluster using terraform
 
