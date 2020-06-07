@@ -1,9 +1,4 @@
-# Credits
-
-- Much inspiration and code has been shifted and lifted from @Starefossen: <https://github.com/evry-ace/kubernetes-on-air>.
-- A Grafana dashboard has been tweaked, originally created by @buhay. Reference in the list below.
-
-## Creating a basic spot instance EKS cluster using terraform
+# Creating a basic spot instance EKS cluster using terraform
 
 This repository provides the basic necessities for an EKS cluster. This includes:
 
@@ -124,3 +119,8 @@ Exporting the above variable would set the environment variable to staging, with
 
 Much like the Jackson 5, it's as easy as ABC.. Look no further than this article from Amazon:
 [EKS cluster connection](https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/)
+
+## Credits
+
+- Much inspiration and code has been lifted and shifted from @Starefossen: <https://github.com/evry-ace/kubernetes-on-air>.
+- A Grafana dashboard has been tweaked, originally created by @buhay. Reference in the list below.
