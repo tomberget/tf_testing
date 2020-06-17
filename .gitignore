@@ -5,5 +5,11 @@
 *.tfstate
 *.tfstate.*
 
+#Ignore TFvars
+*.TFvars
+
+#Ignore kubeconfig file
+kubeconfig_*
+
 #Ignore modules folder
 **/.modules/*
